@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="core_layout_render_element">
+        <observer name="sr_delivery_date_add_to_order_view" instance="SR\DeliveryDate\Observer\AddHtmlToOrderShippingViewObserver" />
+    </event>
+</config>

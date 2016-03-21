@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="sr_save_delivery_date_in_quote" type="SR\DeliveryDate\Plugin\Checkout\Model\ShippingInformationManagement" sortOrder="1"/>
+    </type>
+</config>
