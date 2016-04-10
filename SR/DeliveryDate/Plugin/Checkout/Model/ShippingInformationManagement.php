@@ -24,7 +24,9 @@ class ShippingInformationManagement
     ) {
         $extAttributes = $addressInformation->getExtensionAttributes();
         $deliveryDate = $extAttributes->getDeliveryDate();
+        $deliveryComment = $extAttributes->getDeliveryComment();
         $quote = $this->quoteRepository->getActive($cartId);
         $quote->setDeliveryDate($deliveryDate);
+        $quote->setDeliveryComment($deliveryComment);
     }
 }

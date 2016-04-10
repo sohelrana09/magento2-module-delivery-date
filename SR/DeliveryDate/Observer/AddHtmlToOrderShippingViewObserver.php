@@ -37,6 +37,7 @@ class AddHtmlToOrderShippingViewObserver implements ObserverInterface
 
             $deliveryDateBlock = $this->_objectManager->create('Magento\Framework\View\Element\Template');
             $deliveryDateBlock->setDeliveryDate($formattedDate);
+            $deliveryDateBlock->setDeliveryComment($order->getDeliveryComment());
             $deliveryDateBlock->setTemplate('SR_DeliveryDate::order_info_shipping_info.phtml');
             $html = $observer->getTransport()->getOutput() . $deliveryDateBlock->toHtml();
             $observer->getTransport()->setOutput($html);

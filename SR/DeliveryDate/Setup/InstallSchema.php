@@ -32,12 +32,32 @@ class InstallSchema implements InstallSchemaInterface
         );
 
         $installer->getConnection()->addColumn(
+            $installer->getTable('quote'),
+            'delivery_comment',
+            [
+                'type' => 'text',
+                'nullable' => false,
+                'comment' => 'Delivery Comment',
+            ]
+        );
+
+        $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'delivery_date',
             [
                 'type' => 'datetime',
                 'nullable' => false,
                 'comment' => 'Delivery Date',
+            ]
+        );
+
+        $installer->getConnection()->addColumn(
+            $installer->getTable('sales_order'),
+            'delivery_comment',
+            [
+                'type' => 'text',
+                'nullable' => false,
+                'comment' => 'Delivery Comment',
             ]
         );
 

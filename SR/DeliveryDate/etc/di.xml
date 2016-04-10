@@ -3,4 +3,11 @@
     <type name="Magento\Checkout\Model\ShippingInformationManagement">
         <plugin name="sr_save_delivery_date_in_quote" type="SR\DeliveryDate\Plugin\Checkout\Model\ShippingInformationManagement" sortOrder="1"/>
     </type>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="delivery_date" xsi:type="string">sales_order.delivery_date</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

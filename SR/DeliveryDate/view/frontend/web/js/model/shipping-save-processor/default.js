@@ -41,7 +41,8 @@ define(
                         shipping_method_code: quote.shippingMethod().method_code,
                         shipping_carrier_code: quote.shippingMethod().carrier_code,
                         extension_attributes:{
-                            delivery_date: $('[name="delivery_date"]').val()
+                            delivery_date: $('[name="delivery_date"]').val(),
+                            delivery_comment: $('[name="delivery_comment"]').val()
                         }
                     }
                 };
