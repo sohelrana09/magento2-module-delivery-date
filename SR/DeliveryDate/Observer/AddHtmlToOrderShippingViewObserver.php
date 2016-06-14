@@ -9,14 +9,14 @@ class AddHtmlToOrderShippingViewObserver implements ObserverInterface
     /**
      * @var \Magento\Framework\ObjectManagerInterface
      */
-    protected $_objectManager;
+    protected $objectManager;
 
     /**
-     * @param \Magento\Framework\ObjectManagerInterface $objectmanager
+     * @param \Magento\Framework\ObjectManagerInterface $objectManager
      */
-    public function __construct(\Magento\Framework\ObjectManagerInterface $objectmanager)
+    public function __construct(\Magento\Framework\ObjectManagerInterface $objectManager)
     {
-        $this->_objectManager = $objectmanager;
+        $this->objectManager = $objectManager;
     }
 
     public function execute(EventObserver $observer)
@@ -24,18 +24,23 @@ class AddHtmlToOrderShippingViewObserver implements ObserverInterface
         if($observer->getElementName() == 'order_shipping_view') {
             $orderShippingViewBlock = $observer->getLayout()->getBlock($observer->getElementName());
             $order = $orderShippingViewBlock->getOrder();
-            $localeDate = $this->_objectManager->create('\Magento\Framework\Stdlib\DateTime\TimezoneInterface');
-            $formattedDate = $localeDate->formatDate(
-                $localeDate->scopeDate(
-                    $order->getStore(),
-                    $order->getDeliveryDate(),
-                    true
-                ),
-                \IntlDateFormatter::MEDIUM,
-                false
-            );
+            $localeDate = $this->objectManager->create('\Magento\Framework\Stdlib\DateTime\TimezoneInterface');
+            if($order->getDeliveryDate() != '0000-00-00 00:00:00') {
+                $formattedDate = $localeDate->formatDate(
+                    $localeDate->scopeDate(
+                        $order->getStore(),
+                        $order->getDeliveryDate(),
+                        true
+                    ),
+                    \IntlDateFormatter::MEDIUM,
+                    false
+                );
+            } else {
+                $formattedDate = __('N/A');
+            }
 
-            $deliveryDateBlock = $this->_objectManager->create('Magento\Framework\View\Element\Template');
+
+            $deliveryDateBlock = $this->objectManager->create('Magento\Framework\View\Element\Template');
             $deliveryDateBlock->setDeliveryDate($formattedDate);
             $deliveryDateBlock->setDeliveryComment($order->getDeliveryComment());
             $deliveryDateBlock->setTemplate('SR_DeliveryDate::order_info_shipping_info.phtml');
