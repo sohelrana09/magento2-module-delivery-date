@@ -13,22 +13,28 @@ define([
             this._super();
             var disabled = window.checkoutConfig.shipping.delivery_date.disabled;
             var noday = window.checkoutConfig.shipping.delivery_date.noday;
+            var hourMin = window.checkoutConfig.shipping.delivery_date.hourMin;
+            var hourMax = window.checkoutConfig.shipping.delivery_date.hourMax;
+
             var disabledDay = disabled.split(",").map(function(item) {
                 return parseInt(item, 10);
             });
             
-            ko.bindingHandlers.datepicker = {
+            ko.bindingHandlers.datetimepicker = {
                 init: function (element, valueAccessor, allBindingsAccessor) {
                     var $el = $(element);
-
                     //initialize datepicker with some optional options
                     if(noday) {
                         var options = {
-                            minDate: 0
+                            minDate: 0,
+                            hourMin: hourMin,
+                            hourMax: hourMax
                         };
                     } else {
                         var options = {
                             minDate: 0,
+                            hourMin: hourMin,
+                            hourMax: hourMax,
                             beforeShowDay: function(date) {
                                 var day = date.getDay();
                                 if(disabledDay.indexOf(day) > -1) {
@@ -40,18 +46,18 @@ define([
                         };
                     }
 
-                    $el.datepicker(options);
+                    $el.datetimepicker(options);
 
                     var writable = valueAccessor();
                     if (!ko.isObservable(writable)) {
                         var propWriters = allBindingsAccessor()._ko_property_writers;
-                        if (propWriters && propWriters.datepicker) {
-                            writable = propWriters.datepicker;
+                        if (propWriters && propWriters.datetimepicker) {
+                            writable = propWriters.datetimepicker;
                         } else {
                             return;
                         }
                     }
-                    writable($(element).datepicker("getDate"));
+                    writable($(element).datetimepicker("getDate"));
                 },
                 update: function (element, valueAccessor) {
                     var widget = $(element).data("DateTimePicker");

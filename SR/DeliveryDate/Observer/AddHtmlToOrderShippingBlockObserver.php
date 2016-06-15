@@ -26,14 +26,15 @@ class AddHtmlToOrderShippingBlockObserver implements ObserverInterface
             $order = $orderShippingViewBlock->getOrder();
             $localeDate = $this->objectManager->create('\Magento\Framework\Stdlib\DateTime\TimezoneInterface');
             if($order->getDeliveryDate() != '0000-00-00 00:00:00') {
-                $formattedDate = $localeDate->formatDate(
-                    $localeDate->scopeDate(
-                        $order->getStore(),
-                        $order->getDeliveryDate(),
-                        true
-                    ),
+                $formattedDate = $localeDate->formatDateTime(
+                    $order->getDeliveryDate(),
                     \IntlDateFormatter::MEDIUM,
-                    false
+                    \IntlDateFormatter::MEDIUM,
+                    null,
+                    $localeDate->getConfigTimezone(
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                        $order->getStore()->getCode()
+                    )
                 );
             } else {
                 $formattedDate = __('N/A');

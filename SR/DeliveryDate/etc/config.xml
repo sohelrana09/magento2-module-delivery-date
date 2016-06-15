@@ -4,6 +4,8 @@
         <sr_deliverydate>
             <general>
                 <disabled>-1</disabled>
+                <hourMin>8</hourMin>
+                <hourMax>22</hourMax>
             </general>
         </sr_deliverydate>
     </default>

@@ -11,6 +11,14 @@
                     <label>Disabled Delivery Date</label>
                     <source_model>SR\DeliveryDate\Model\Config\Source\Disabled</source_model>
                 </field>
+                <field id="hourMin" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Delivery Hour Start:</label>
+                    <comment>Should be 8=>8AM, 9=>9AM </comment>
+                </field>
+                <field id="hourMax" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Delivery Hour End:</label>
+                    <comment>Should be 22=>7PM, 23=>8PM because Minutes cover 1hr </comment>
+                </field>
             </group>
         </section>
     </system>
