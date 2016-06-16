@@ -13,17 +13,17 @@ define([
             this._super();
             var disabled = window.checkoutConfig.shipping.delivery_date.disabled;
             var noday = window.checkoutConfig.shipping.delivery_date.noday;
-            var hourMin = window.checkoutConfig.shipping.delivery_date.hourMin;
-            var hourMax = window.checkoutConfig.shipping.delivery_date.hourMax;
+            var hourMin = parseInt(window.checkoutConfig.shipping.delivery_date.hourMin);
+            var hourMax = parseInt(window.checkoutConfig.shipping.delivery_date.hourMax);
 
             var disabledDay = disabled.split(",").map(function(item) {
                 return parseInt(item, 10);
             });
-            
+
             ko.bindingHandlers.datetimepicker = {
                 init: function (element, valueAccessor, allBindingsAccessor) {
                     var $el = $(element);
-                    //initialize datepicker with some optional options
+                    //initialize datetimepicker
                     if(noday) {
                         var options = {
                             minDate: 0,
