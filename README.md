@@ -1,4 +1,4 @@
-DeliveryDate module for magento2
+Order Delivery Date module for magento2
 
 Setup step:
 
