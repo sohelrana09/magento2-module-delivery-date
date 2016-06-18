@@ -3,6 +3,7 @@
     <default>
         <sr_deliverydate>
             <general>
+                <format>yy-mm-dd</format>
                 <disabled>-1</disabled>
                 <hourMin>8</hourMin>
                 <hourMax>22</hourMax>

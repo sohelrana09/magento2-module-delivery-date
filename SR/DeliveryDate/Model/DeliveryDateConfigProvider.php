@@ -6,6 +6,7 @@ use Magento\Store\Model\ScopeInterface;
 
 class DeliveryDateConfigProvider implements ConfigProviderInterface
 {
+    const XPATH_FORMAT = 'sr_deliverydate/general/format';
     const XPATH_DISABLED = 'sr_deliverydate/general/disabled';
     const XPATH_HOURMIN = 'sr_deliverydate/general/hourMin';
     const XPATH_HOURMAX = 'sr_deliverydate/general/hourMax';
@@ -41,6 +42,7 @@ class DeliveryDateConfigProvider implements ConfigProviderInterface
         $disabled = $this->scopeConfig->getValue(self::XPATH_DISABLED, ScopeInterface::SCOPE_STORE, $store);
         $hourMin = $this->scopeConfig->getValue(self::XPATH_HOURMIN, ScopeInterface::SCOPE_STORE, $store);
         $hourMax = $this->scopeConfig->getValue(self::XPATH_HOURMAX, ScopeInterface::SCOPE_STORE, $store);
+        $format = $this->scopeConfig->getValue(self::XPATH_FORMAT, ScopeInterface::SCOPE_STORE, $store);
         
         $noday = 0;
         if($disabled == -1) {
@@ -50,6 +52,7 @@ class DeliveryDateConfigProvider implements ConfigProviderInterface
         $config = [
             'shipping' => [
                 'delivery_date' => [
+                    'format' => $format,
                     'disabled' => $disabled,
                     'noday' => $noday,
                     'hourMin' => $hourMin,

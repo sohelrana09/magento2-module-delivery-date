@@ -15,7 +15,10 @@ define([
             var noday = window.checkoutConfig.shipping.delivery_date.noday;
             var hourMin = parseInt(window.checkoutConfig.shipping.delivery_date.hourMin);
             var hourMax = parseInt(window.checkoutConfig.shipping.delivery_date.hourMax);
-
+            var format = window.checkoutConfig.shipping.delivery_date.format;
+            if(!format) {
+                format = 'yy-mm-dd';
+            }
             var disabledDay = disabled.split(",").map(function(item) {
                 return parseInt(item, 10);
             });
@@ -27,12 +30,14 @@ define([
                     if(noday) {
                         var options = {
                             minDate: 0,
+                            dateFormat:format,
                             hourMin: hourMin,
                             hourMax: hourMax
                         };
                     } else {
                         var options = {
                             minDate: 0,
+                            dateFormat:format,
                             hourMin: hourMin,
                             hourMax: hourMax,
                             beforeShowDay: function(date) {

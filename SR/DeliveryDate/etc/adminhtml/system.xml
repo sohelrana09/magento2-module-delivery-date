@@ -7,6 +7,10 @@
             <resource>SR_DeliveryDate::deliverydate</resource>
             <group id="general" type="text"  sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Extension Settings</label>
+                <field id="format" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Date Format:</label>
+                    <comment>yy-mm-dd</comment>
+                </field>
                 <field id="disabled" translate="label" type="multiselect" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Disabled Delivery Date</label>
                     <source_model>SR\DeliveryDate\Model\Config\Source\Disabled</source_model>
