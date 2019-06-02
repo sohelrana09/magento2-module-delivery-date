@@ -23,6 +23,10 @@
                     <label>Delivery Hour End:</label>
                     <comment>Should be 22=>7PM, 23=>8PM because Minutes cover 1hr </comment>
                 </field>
+                <field id="required_delivery_date" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Required Delivery Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>

@@ -7,6 +7,7 @@
                 <disabled>-1</disabled>
                 <hourMin>8</hourMin>
                 <hourMax>22</hourMax>
+                <required_delivery_date>0</required_delivery_date>
             </general>
         </sr_deliverydate>
     </default>

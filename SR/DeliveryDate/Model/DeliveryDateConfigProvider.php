@@ -2,35 +2,23 @@
 namespace SR\DeliveryDate\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-use Magento\Store\Model\ScopeInterface;
 
 class DeliveryDateConfigProvider implements ConfigProviderInterface
 {
-    const XPATH_FORMAT = 'sr_deliverydate/general/format';
-    const XPATH_DISABLED = 'sr_deliverydate/general/disabled';
-    const XPATH_HOURMIN = 'sr_deliverydate/general/hourMin';
-    const XPATH_HOURMAX = 'sr_deliverydate/general/hourMax';
-
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var Config
      */
-    protected $storeManager;
+    protected $config;
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $scopeConfig;
-
-    /**
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * DeliveryDateConfigProvider constructor.
+     *
+     * @param Config $config
      */
     public function __construct(
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        Config $config
     ) {
-        $this->storeManager = $storeManager;
-        $this->scopeConfig = $scopeConfig;
+        $this->config = $config;
     }
 
     /**
@@ -38,11 +26,10 @@ class DeliveryDateConfigProvider implements ConfigProviderInterface
      */
     public function getConfig()
     {
-        $store = $this->getStoreId();
-        $disabled = $this->scopeConfig->getValue(self::XPATH_DISABLED, ScopeInterface::SCOPE_STORE, $store);
-        $hourMin = $this->scopeConfig->getValue(self::XPATH_HOURMIN, ScopeInterface::SCOPE_STORE, $store);
-        $hourMax = $this->scopeConfig->getValue(self::XPATH_HOURMAX, ScopeInterface::SCOPE_STORE, $store);
-        $format = $this->scopeConfig->getValue(self::XPATH_FORMAT, ScopeInterface::SCOPE_STORE, $store);
+        $disabled = $this->config->getDisabled();
+        $hourMin = $this->config->getHourMin();
+        $hourMax = $this->config->getHourMax();
+        $format = $this->config->getFormat();
         
         $noday = 0;
         if($disabled == -1) {
@@ -62,10 +49,5 @@ class DeliveryDateConfigProvider implements ConfigProviderInterface
         ];
 
         return $config;
-    }
-
-    public function getStoreId()
-    {
-        return $this->storeManager->getStore()->getStoreId();
     }
 }

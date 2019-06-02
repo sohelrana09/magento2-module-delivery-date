@@ -10,4 +10,8 @@
             </argument>
         </arguments>
     </virtualType>
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="sr_checkout_layout_processor_add_delivery_block"
+                type="SR\DeliveryDate\Plugin\Checkout\Block\LayoutProcessor" sortOrder="1"/>
+    </type>
 </config>
