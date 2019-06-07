@@ -3,35 +3,52 @@ namespace SR\DeliveryDate\Observer;
 
 use Magento\Framework\Event\Observer as EventObserver;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\View\Element\TemplateFactory;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Store\Model\ScopeInterface;
 
-class AddHtmlToOrderShippingViewObserver implements ObserverInterface
+class AddHtmlToOrderShippingView implements ObserverInterface
 {
     /**
-     * @var \Magento\Framework\ObjectManagerInterface
+     * @var TemplateFactory
      */
-    protected $objectManager;
+    protected $templateFactory;
 
     /**
-     * @param \Magento\Framework\ObjectManagerInterface $objectManager
+     * @var TimezoneInterface
      */
-    public function __construct(\Magento\Framework\ObjectManagerInterface $objectManager)
-    {
-        $this->objectManager = $objectManager;
+    private $timezone;
+
+    /**
+     * AddHtmlToOrderShippingBlock constructor.
+     *
+     * @param TemplateFactory $templateFactory
+     * @param TimezoneInterface $timezone
+     */
+    public function __construct(
+        TemplateFactory $templateFactory,
+        TimezoneInterface $timezone
+    ) {
+        $this->templateFactory = $templateFactory;
+        $this->timezone = $timezone;
     }
 
+    /**
+     * @param EventObserver $observer
+     * @return $this
+     */
     public function execute(EventObserver $observer)
     {
         if($observer->getElementName() == 'order_shipping_view') {
             $orderShippingViewBlock = $observer->getLayout()->getBlock($observer->getElementName());
             $order = $orderShippingViewBlock->getOrder();
-            $localeDate = $this->objectManager->create('\Magento\Framework\Stdlib\DateTime\TimezoneInterface');
             if($order->getDeliveryDate() != '0000-00-00 00:00:00') {
-                $formattedDate = $localeDate->formatDateTime(
+                $formattedDate = $this->timezone->formatDateTime(
                     $order->getDeliveryDate(),
                     \IntlDateFormatter::MEDIUM,
                     \IntlDateFormatter::MEDIUM,
                     null,
-                    $localeDate->getConfigTimezone(
+                    $this->timezone->getConfigTimezone(
                         \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
                         $order->getStore()->getCode()
                     )
@@ -40,13 +57,15 @@ class AddHtmlToOrderShippingViewObserver implements ObserverInterface
                 $formattedDate = __('N/A');
             }
 
-
-            $deliveryDateBlock = $this->objectManager->create('Magento\Framework\View\Element\Template');
+            /** @var \Magento\Framework\View\Element\Template $deliveryDateBlock */
+            $deliveryDateBlock = $this->templateFactory->create();
             $deliveryDateBlock->setDeliveryDate($formattedDate);
             $deliveryDateBlock->setDeliveryComment($order->getDeliveryComment());
             $deliveryDateBlock->setTemplate('SR_DeliveryDate::order_info_shipping_info.phtml');
             $html = $observer->getTransport()->getOutput() . $deliveryDateBlock->toHtml();
             $observer->getTransport()->setOutput($html);
         }
+
+        return $this;
     }
 }

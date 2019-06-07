@@ -1,0 +1,58 @@
+<?php /** @var \SR\DeliveryDate\Block\Adminhtml\DeliveryDate $block */ ?>
+<br/>
+<label class="label">Delivery Date</label>
+<div class="control">
+    <input class="input-text <?php if ($block->getRequiredDeliveryDate()): ?> required-entry <?php endif ?>"
+           type="text" name="delivery_date" id="delivery_date" readonly="true"/>
+</div>
+
+<label class="label">Comment</label>
+<div class="control">
+    <textarea name="delivery_comment" id="delivery_comment"></textarea>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/calendar'
+    ], function ($) {
+        $(document).ready(function () {
+            var config = <?= $block->getConfig() ?>;
+            var disabled = config.shipping.delivery_date.disabled;
+            var noday = config.shipping.delivery_date.noday;
+            var hourMin = parseInt(config.shipping.delivery_date.hourMin);
+            var hourMax = parseInt(config.shipping.delivery_date.hourMax);
+            var format = config.shipping.delivery_date.format;
+            if(!format) {
+                format = 'yy-mm-dd';
+            }
+            var disabledDay = disabled.split(",").map(function(item) {
+                return parseInt(item, 10);
+            });
+
+            if(noday) {
+                var options = {
+                    minDate: 0,
+                    dateFormat:format,
+                    hourMin: hourMin,
+                    hourMax: hourMax
+                };
+            } else {
+                var options = {
+                    minDate: 0,
+                    dateFormat:format,
+                    hourMin: hourMin,
+                    hourMax: hourMax,
+                    beforeShowDay: function(date) {
+                        var day = date.getDay();
+                        if(disabledDay.indexOf(day) > -1) {
+                            return [false];
+                        } else {
+                            return [true];
+                        }
+                    }
+                };
+            }
+            $('#delivery_date').datetimepicker(options);
+        });
+    });
+</script>

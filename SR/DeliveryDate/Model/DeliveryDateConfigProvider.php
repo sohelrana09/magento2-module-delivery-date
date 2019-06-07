@@ -26,28 +26,6 @@ class DeliveryDateConfigProvider implements ConfigProviderInterface
      */
     public function getConfig()
     {
-        $disabled = $this->config->getDisabled();
-        $hourMin = $this->config->getHourMin();
-        $hourMax = $this->config->getHourMax();
-        $format = $this->config->getFormat();
-        
-        $noday = 0;
-        if($disabled == -1) {
-            $noday = 1;
-        }
-
-        $config = [
-            'shipping' => [
-                'delivery_date' => [
-                    'format' => $format,
-                    'disabled' => $disabled,
-                    'noday' => $noday,
-                    'hourMin' => $hourMin,
-                    'hourMax' => $hourMax
-                ]
-            ]
-        ];
-
-        return $config;
+        return $this->config->getConfig();
     }
 }

@@ -98,4 +98,34 @@ class Config
         }
         return $this->storeId;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfig()
+    {
+        $disabled = $this->getDisabled();
+        $hourMin = $this->getHourMin();
+        $hourMax = $this->getHourMax();
+        $format = $this->getFormat();
+
+        $noday = 0;
+        if($disabled == -1) {
+            $noday = 1;
+        }
+
+        $config = [
+            'shipping' => [
+                'delivery_date' => [
+                    'format' => $format,
+                    'disabled' => $disabled,
+                    'noday' => $noday,
+                    'hourMin' => $hourMin,
+                    'hourMax' => $hourMax
+                ]
+            ]
+        ];
+
+        return $config;
+    }
 }

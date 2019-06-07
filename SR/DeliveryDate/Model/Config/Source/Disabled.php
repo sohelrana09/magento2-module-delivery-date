@@ -1,18 +1,22 @@
 <?php
 namespace SR\DeliveryDate\Model\Config\Source;
 
+use Magento\Framework\Locale\ListsInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 
-class Disabled implements \Magento\Framework\Option\ArrayInterface
+class Disabled implements OptionSourceInterface
 {
     /**
-     * @var \Magento\Framework\Locale\ListsInterface
+     * @var ListsInterface
      */
     protected $localeLists;
 
     /**
-     * @param \Magento\Framework\Locale\ListsInterface $localeLists
+     * Disabled constructor.
+     *
+     * @param ListsInterface $localeLists
      */
-    public function __construct(\Magento\Framework\Locale\ListsInterface $localeLists)
+    public function __construct(ListsInterface $localeLists)
     {
         $this->localeLists = $localeLists;
     }

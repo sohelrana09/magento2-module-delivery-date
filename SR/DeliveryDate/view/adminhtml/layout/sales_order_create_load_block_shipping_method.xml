@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="shipping_method">
+            <block class="SR\DeliveryDate\Block\Adminhtml\DeliveryDate"
+                   template="SR_DeliveryDate::order/create/delivery_date.phtml"
+                   name="delivery_date" as="delivery_date" after="-"/>
+        </referenceBlock>
+    </body>
+</page>
