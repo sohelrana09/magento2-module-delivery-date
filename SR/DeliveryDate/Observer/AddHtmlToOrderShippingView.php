@@ -49,7 +49,7 @@ class AddHtmlToOrderShippingView implements ObserverInterface
                     \IntlDateFormatter::MEDIUM,
                     null,
                     $this->timezone->getConfigTimezone(
-                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                        ScopeInterface::SCOPE_STORE,
                         $order->getStore()->getCode()
                     )
                 );
