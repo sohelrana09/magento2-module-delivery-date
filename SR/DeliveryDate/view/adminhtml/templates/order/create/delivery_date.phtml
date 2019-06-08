@@ -1,14 +1,19 @@
 <?php /** @var \SR\DeliveryDate\Block\Adminhtml\DeliveryDate $block */ ?>
-<br/>
-<label class="label">Delivery Date</label>
-<div class="control">
-    <input class="input-text <?php if ($block->getRequiredDeliveryDate()): ?> required-entry <?php endif ?>"
-           type="text" name="delivery_date" id="delivery_date" readonly="true"/>
+<div class="admin__field">
+    <label for="delivery_date" class="admin__field-label"><span><?= __('Delivery Date') ?></span></label>
+    <div class="admin__field-control">
+        <input class="admin__control-text <?php if ($block->getRequiredDeliveryDate()): ?> required-entry <?php endif ?>"
+               type="text" name="delivery_date" id="delivery_date" readonly="true"/>
+    </div>
 </div>
-
-<label class="label">Comment</label>
-<div class="control">
-    <textarea name="delivery_comment" id="delivery_comment"></textarea>
+<div class="admin__field field-comment">
+    <label for="delivery_comment" class="admin__field-label"><span><?= __('Comment') ?></span></label>
+    <div class="admin__field-control">
+        <textarea
+                id="delivery_comment"
+                name="delivery_comment"
+                class="admin__control-textarea" cols="5" rows="5"></textarea>
+    </div>
 </div>
 <script type="text/javascript">
     require([

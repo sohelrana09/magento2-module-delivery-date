@@ -1,20 +1,24 @@
-<div id="delivery-date">
-    <strong><?= __('Delivery Date') ?></strong>
-    <span class="price"><?= $block->getDeliveryDate() ?></span>
-</div>
-<div id="delivery-comment">
-    <strong><?= __('Comment') ?>:</strong>
-    <br/>
-    <span class="price"><?= $block->getDeliveryComment() ?></span>
-</div>
+<section class="admin__page-section" id="delivery-date-content">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Delivery Date Information')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div id="delivery-date">
+            <strong><?= __('Delivery Date') ?></strong>
+            <span><?= $block->getDeliveryDate() ?></span>
+        </div>
+        <div id="delivery-comment">
+            <strong><?= __('Comment') ?>:</strong>
+            <br/>
+            <?= $block->getDeliveryComment() ?>
+        </div>
+    </div>
+</section>
 <script type="text/javascript">
     require(
         ['jquery'],
         function($) {
-            var element = $('#delivery-date').detach();
-            $('.order-shipping-method').append(element);
-            var element = $('#delivery-comment').detach();
-            $('.order-shipping-method').append(element);
+            $('#delivery-date-content').insertAfter($('.order-view-billing-shipping'));
         }
     );
 </script>
