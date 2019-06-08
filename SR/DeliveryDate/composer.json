@@ -1,15 +1,16 @@
 {
     "name": "sr/module-delivery-date",
-    "description": "A Magento 2 module for customer can choose shipping delivery date from frontend order",
+    "description": "Order Delivery date extension will allow customer to choose preferable delivery date for order.",
     "require": {
-        "php": "~5.5.0|~5.6.0|~7.0.0",
-        "magento/module-config": "100.0.*",
-        "magento/module-store": "100.0.*",
-        "magento/module-backend": "100.0.*",
-        "magento/framework": "100.0.*"
+        "php": "~7.1.3||~7.2.0",
+        "magento/module-config": "101.1.*",
+        "magento/module-store": "101.0.*",
+        "magento/module-backend": "101.0.*",
+        "magento/module-checkout": "100.3.*",
+        "magento/module-sales": "102.0.*"
     },
     "type": "magento2-module",
-    "version": "100.0.0",
+    "version": "2.0.2",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
